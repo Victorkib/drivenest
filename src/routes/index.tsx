@@ -2,9 +2,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   BadgeCheck,
+  BriefcaseBusiness,
   CalendarDays,
   ChevronDown,
   Car,
+  Headphones,
   MapPin,
   Menu,
   Phone,
@@ -12,6 +14,8 @@ import {
   Search,
   Shield,
   Star,
+  UserRound,
+  Users,
   LifeBuoy,
 } from "lucide-react";
 
@@ -356,7 +360,7 @@ function Index() {
       </section>
 
       {/* Vehicles */}
-      <section className="surface-blush py-20">
+      <section id="vehicles" className="surface-blush py-20">
         <div className="mx-auto max-w-7xl px-6">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-foreground sm:text-4xl">
@@ -514,31 +518,231 @@ function Index() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-ink py-14 text-ink-foreground">
-        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <p className="font-display text-2xl font-extrabold tracking-tight">drivenest</p>
-            <p className="mt-2 text-sm text-ink-foreground/70">
-              Car hire across Kenya, made simple.
+      {/* How DriveNest helps */}
+      <section className="bg-ink py-20 text-ink-foreground">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div className="max-w-md">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">
+              Built around your trip
             </p>
+            <h2 className="mt-4 text-3xl font-bold leading-tight sm:text-4xl">
+              People already ask you where to find a car. Get paid for the answer.
+            </h2>
+            <p className="mt-5 text-sm leading-relaxed text-ink-foreground/70">
+              Share a trusted recommendation, help someone get moving, and earn when their booking
+              is confirmed. DriveNest keeps the handoff simple.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a
+                href="#operators"
+                className="rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
+              >
+                Start earning
+              </a>
+              <a
+                href="#how-it-works"
+                className="rounded-full border border-ink-foreground/20 px-5 py-3 text-sm font-semibold text-ink-foreground transition-colors hover:bg-ink-foreground/10"
+              >
+                See how it works
+              </a>
+            </div>
           </div>
-          <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm text-ink-foreground/80">
-            <a href="#vehicles" className="hover:text-ink-foreground">
-              Vehicles
-            </a>
-            <a href="#cities" className="hover:text-ink-foreground">
-              Cities
-            </a>
-            <a href="#operators" className="hover:text-ink-foreground">
+          <div className="grid gap-3 sm:grid-cols-2">
+            {[
+              {
+                icon: UserRound,
+                title: "Sales agents",
+                body: "Turn trusted advice into a useful booking path for every client.",
+              },
+              {
+                icon: Headphones,
+                title: "Creators",
+                body: "Give your audience a better way to explore Kenya on four wheels.",
+              },
+              {
+                icon: BriefcaseBusiness,
+                title: "Agents & hosts",
+                body: "Add car hire to your guest, relocation, or travel service.",
+              },
+              {
+                icon: Users,
+                title: "Groups and lodges",
+                body: "Help teams and guests move smoothly from arrival to adventure.",
+              },
+            ].map(({ icon: Icon, title, body }) => (
+              <div
+                key={title}
+                className="rounded-2xl border border-ink-foreground/15 bg-ink-foreground/[0.04] p-5 transition-colors hover:border-primary/60"
+              >
+                <Icon className="size-5 text-primary" />
+                <h3 className="mt-7 text-sm font-bold">{title}</h3>
+                <p className="mt-2 text-xs leading-relaxed text-ink-foreground/65">{body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Business operations */}
+      <section id="how-it-works" className="bg-background py-20">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[1fr_1.1fr] lg:items-center">
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              {
+                icon: Car,
+                title: "Car rental operators",
+                body: "Manage your fleet, bookings, and availability with less back and forth.",
+              },
+              {
+                icon: BriefcaseBusiness,
+                title: "Tour and activity operators",
+                body: "Bundle reliable transport into the itineraries your guests already trust.",
+              },
+            ].map(({ icon: Icon, title, body }) => (
+              <div key={title} className="rounded-2xl border border-border bg-card p-5 shadow-soft">
+                <Icon className="size-5 text-primary" />
+                <h3 className="mt-7 text-sm font-bold text-card-foreground">{title}</h3>
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{body}</p>
+              </div>
+            ))}
+          </div>
+          <div className="max-w-xl">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">
               Become an operator
-            </a>
-            <a href="#support" className="hover:text-ink-foreground">
-              Support
-            </a>
+            </p>
+            <h2 className="mt-4 text-3xl font-bold leading-tight text-foreground sm:text-4xl">
+              Run a rental or tour business? Meet DriveNest.
+            </h2>
+            <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+              DriveNest is the operating layer for modern car hire: more visibility, better customer
+              communication, and clearer payments from enquiry to handover.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a
+                href="#operators"
+                className="rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
+              >
+                Explore DriveNest
+              </a>
+              <a
+                href="#support"
+                className="rounded-full border border-border px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
+              >
+                List your fleet
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Team section */}
+      <section className="bg-ink py-20 text-ink-foreground">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">
+              Better for business
+            </p>
+            <h2 className="mt-4 text-3xl font-bold leading-tight sm:text-4xl">
+              Every trip your team takes, on one account.
+            </h2>
+            <p className="mt-5 max-w-md text-sm leading-relaxed text-ink-foreground/70">
+              Client pickups, airport runs, site visits, and events become easier to request,
+              approve, track, and reconcile.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a
+                href="#support"
+                className="rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground"
+              >
+                Talk to sales
+              </a>
+              <a
+                href="#how-it-works"
+                className="rounded-full border border-ink-foreground/20 px-5 py-3 text-sm font-semibold text-ink-foreground hover:bg-ink-foreground/10"
+              >
+                See how it works
+              </a>
+            </div>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {[
+              [
+                "One account, every department",
+                "Give your team a single place to request and manage every ride.",
+              ],
+              [
+                "Book on behalf of your people",
+                "Keep guest and staff travel moving without scattered messages.",
+              ],
+              ["Pay by invoice", "Make finance-friendly payments with clear booking records."],
+              ["Verified operators only", "Every booking is backed by the DriveNest trust layer."],
+            ].map(([title, body]) => (
+              <div key={title} className="rounded-2xl border border-ink-foreground/15 p-5">
+                <h3 className="text-sm font-bold">{title}</h3>
+                <p className="mt-2 text-xs leading-relaxed text-ink-foreground/65">{body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer id="support" className="bg-ink py-14 text-ink-foreground">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+            <div>
+              <p className="font-display text-2xl font-extrabold tracking-tight">drivenest</p>
+              <p className="mt-3 max-w-xs text-sm leading-relaxed text-ink-foreground/65">
+                The easier way to rent, share, and manage car travel across Kenya.
+              </p>
+              <div className="mt-5 flex gap-2">
+                {["in", "ig", "x"].map((social) => (
+                  <a
+                    key={social}
+                    href="#support"
+                    aria-label={`DriveNest on ${social}`}
+                    className="flex size-8 items-center justify-center rounded-full border border-ink-foreground/20 text-xs font-bold text-ink-foreground/75 hover:border-primary hover:text-primary"
+                  >
+                    {social}
+                  </a>
+                ))}
+              </div>
+            </div>
+            <FooterGroup title="Explore" links={["Vehicles", "Cities", "How it works"]} />
+            <FooterGroup title="City guides" links={["Nairobi", "Mombasa", "Diani", "Kisumu"]} />
+            <FooterGroup
+              title="Business & partners"
+              links={[
+                "Corporate travel",
+                "Become an operator",
+                "List your fleet",
+                "Partner support",
+              ]}
+            />
+          </div>
+          <div className="mt-12 flex flex-col gap-3 border-t border-ink-foreground/10 pt-6 text-xs text-ink-foreground/50 sm:flex-row sm:items-center sm:justify-between">
+            <span>© 2026 DriveNest. All rights reserved.</span>
+            <span>Terms of Service · Privacy Policy</span>
           </div>
         </div>
       </footer>
+    </div>
+  );
+}
+
+function FooterGroup({ title, links }: { title: string; links: string[] }) {
+  return (
+    <div>
+      <p className="text-xs font-bold uppercase tracking-[0.16em] text-ink-foreground/45">
+        {title}
+      </p>
+      <div className="mt-4 flex flex-col gap-3 text-sm text-ink-foreground/70">
+        {links.map((link) => (
+          <a key={link} href="#support" className="transition-colors hover:text-ink-foreground">
+            {link}
+          </a>
+        ))}
+      </div>
     </div>
   );
 }
