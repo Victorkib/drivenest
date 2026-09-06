@@ -418,7 +418,7 @@ function Index() {
 
           <div className="mt-10 text-center">
             <a
-              href="#vehicles"
+              href="/browse"
               className="inline-flex items-center justify-center rounded-full border border-primary/30 bg-background px-6 py-3 text-sm font-semibold text-primary transition-colors hover:bg-blush"
             >
               View all vehicles
