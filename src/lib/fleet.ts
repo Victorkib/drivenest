@@ -28,6 +28,7 @@ export type Vehicle = {
   seats: number;
   minDays: number;
   image: string;
+  gallery?: string[];
   category: Category;
   transmission: string;
   fuel: string;
@@ -266,3 +267,6 @@ export const VEHICLES: Vehicle[] = [
 export const formatKes = (n: number) => `KES ${n.toLocaleString("en-KE")}`;
 
 export const getVehicle = (slug: string) => VEHICLES.find((v) => v.slug === slug);
+
+export const getGalleryImages = (vehicle: Vehicle): string[] =>
+  vehicle.gallery && vehicle.gallery.length > 0 ? vehicle.gallery : [vehicle.image];

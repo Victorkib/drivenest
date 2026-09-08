@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   BadgeCheck,
@@ -20,13 +20,7 @@ import {
 } from "lucide-react";
 
 import heroNairobi from "@/assets/hero-nairobi.jpg";
-import carCompact from "@/assets/car-compact.jpg";
-import carSedan from "@/assets/car-sedan.jpg";
-import carLuxury from "@/assets/car-luxury.jpg";
-import carSuv from "@/assets/car-suv.jpg";
-import carSafari from "@/assets/car-safari.jpg";
-import carVan from "@/assets/car-van.jpg";
-import carPickup from "@/assets/car-pickup.jpg";
+import { CATEGORIES as FLEET_CATEGORIES, VEHICLES, formatKes } from "@/lib/fleet";
 import cityNairobi from "@/assets/city-nairobi.jpg";
 import cityMombasa from "@/assets/city-mombasa.jpg";
 import cityDiani from "@/assets/city-diani.jpg";
@@ -59,141 +53,9 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const CATEGORIES = [
-  "All",
-  "Small car",
-  "Medium car",
-  "Mid-size SUV",
-  "SUV",
-  "Safari",
-  "Pickup truck",
-  "Minivan",
-  "Van",
-  "Bus",
-] as const;
+const CATEGORIES = ["All", ...FLEET_CATEGORIES] as const;
 
 type Category = (typeof CATEGORIES)[number];
-
-const VEHICLES: {
-  name: string;
-  example: string;
-  price: string;
-  image: string;
-  category: Exclude<Category, "All">;
-}[] = [
-  {
-    name: "Economy Small Car",
-    example: "Mazda Demio or similar",
-    price: "KES 4,000",
-    image: carCompact,
-    category: "Small car",
-  },
-  {
-    name: "Economy Medium Car",
-    example: "Toyota Axio or similar",
-    price: "KES 4,500",
-    image: carSedan,
-    category: "Medium car",
-  },
-  {
-    name: "Premium Medium Car",
-    example: "Mercedes C 200 or similar",
-    price: "KES 18,000",
-    image: carSedan,
-    category: "Medium car",
-  },
-  {
-    name: "Luxury Medium Car",
-    example: "Mercedes S 350 or similar",
-    price: "KES 30,000",
-    image: carLuxury,
-    category: "Medium car",
-  },
-  {
-    name: "Economy Mid-Size SUV",
-    example: "Nissan X-Trail or similar",
-    price: "KES 7,500",
-    image: carSuv,
-    category: "Mid-size SUV",
-  },
-  {
-    name: "Standard Mid-Size SUV",
-    example: "Mazda CX-5 or similar",
-    price: "KES 8,500",
-    image: carSuv,
-    category: "Mid-size SUV",
-  },
-  {
-    name: "Premium SUV",
-    example: "Toyota Prado J150 or similar",
-    price: "KES 13,000",
-    image: carSuv,
-    category: "SUV",
-  },
-  {
-    name: "Luxury SUV",
-    example: "Toyota LC200 V8 or similar",
-    price: "KES 28,000",
-    image: carSafari,
-    category: "SUV",
-  },
-  {
-    name: "Economy Safari",
-    example: "Toyota Hiace Safari or similar",
-    price: "KES 25,500",
-    image: carVan,
-    category: "Safari",
-  },
-  {
-    name: "Standard Safari",
-    example: "Toyota Land Cruiser or similar",
-    price: "KES 35,000",
-    image: carSafari,
-    category: "Safari",
-  },
-  {
-    name: "Premium Pickup Truck",
-    example: "Toyota Hilux (2x Cab) or similar",
-    price: "KES 15,000",
-    image: carPickup,
-    category: "Pickup truck",
-  },
-  {
-    name: "Standard Minivan",
-    example: "Toyota Noah or similar",
-    price: "KES 8,000",
-    image: carVan,
-    category: "Minivan",
-  },
-  {
-    name: "Premium Minivan",
-    example: "Toyota Alphard or similar",
-    price: "KES 16,000",
-    image: carVan,
-    category: "Minivan",
-  },
-  {
-    name: "Standard Van",
-    example: "Toyota Hiace or similar",
-    price: "KES 15,000",
-    image: carVan,
-    category: "Van",
-  },
-  {
-    name: "Standard Bus",
-    example: "Toyota Coaster or similar",
-    price: "KES 26,000",
-    image: carVan,
-    category: "Bus",
-  },
-  {
-    name: "Compact City Car",
-    example: "Suzuki Swift or similar",
-    price: "KES 3,800",
-    image: carCompact,
-    category: "Small car",
-  },
-];
 
 const CITIES = [
   { name: "Nairobi", tag: "Capital · fleet hub", image: cityNairobi },
@@ -390,8 +252,10 @@ function Index() {
 
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {vehicles.map((v) => (
-              <article
-                key={v.name}
+              <Link
+                key={v.slug}
+                to="/vehicles/$slug"
+                params={{ slug: v.slug }}
                 className="group overflow-hidden rounded-3xl bg-card shadow-soft transition-shadow hover:shadow-lift"
               >
                 <div className="overflow-hidden bg-blush">
@@ -408,11 +272,11 @@ function Index() {
                   <h3 className="text-base font-semibold text-card-foreground">{v.name}</h3>
                   <p className="text-sm text-muted-foreground">{v.example}</p>
                   <p className="pt-2 text-sm font-semibold text-primary">
-                    {v.price}
+                    {formatKes(v.price)}
                     <span className="font-medium text-muted-foreground">/day</span>
                   </p>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
 
